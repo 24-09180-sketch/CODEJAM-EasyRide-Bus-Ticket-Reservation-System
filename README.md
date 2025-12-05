@@ -1,50 +1,59 @@
 # CODEJAM-EasyRide-Bus-Ticket-Reservation-System
 This system is a is a console-based system that is designed to simplify bus ticket booking and management by allowing users or passengers to view available destinations, check seat availability, book tickets, and cancel reservations using a booking ID. The goal of this system is to provide a convenient and organized way to handle bus reservations. 
 
+// ──── ୨୧ ──── Group 4 >⩊<   ──── ୨୧ ────
+// CodeJAM EasyRide: Bus Ticket Reservation System
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// ===== ABSTRACTION =====
-// Abstract class representing generic destinations.
-// It hides details and only exposes essential methods.
+// ===================================================
+//  ☆ ABSTRACTION ☆
+//  This abstract class acts as a template for all
+//  destination types. We only show the important
+//  methods and hide the details. 
+// ===================================================
 abstract class Destination {
-    public abstract void showDestinations();  // Abstract method
-    public abstract double getFare(int choice);  // Abstract method
-    public abstract String getName(int choice);  // Abstract method
+    public abstract void showDestinations();        // method to display destinations
+    public abstract double getFare(int choice);     // method to get fare
+    public abstract String getName(int choice);     // method to get name of destination
 }
 
-// ===== INHERITANCE + POLYMORPHISM =====
-// BusDestination inherits from Destination
-// and provides its own implementation.
+// ===================================================
+//  𖹭 INHERITANCE + POLYMORPHISM 𖹭
+//  BusDestination inherits from Destination and
+//  provides its own version of the abstract methods.
+// ===================================================
 class BusDestination extends Destination {
 
-    // Concrete data representing places and fares
+    // Sample data for places and fares
     private final String[] places = {"Manila", "Baguio", "Cebu", "Davao", "Vigan"};
-    private final double[] fares = {600, 900, 1200, 1800, 1500};
+    private final double[] fares  = {600, 900, 1200, 1800, 1500};
 
     @Override
     public void showDestinations() {
         System.out.println("Available Destinations and Fares:");
         for (int i = 0; i < places.length; i++) {
-            // Peso sign included
             System.out.printf("%d. %s - ₱%.2f%n", i + 1, places[i], fares[i]);
         }
     }
 
     @Override
     public double getFare(int choice) {
-        return fares[choice - 1];
+        return fares[choice - 1];  // get fare based on user choice
     }
 
     @Override
     public String getName(int choice) {
-        return places[choice - 1];
+        return places[choice - 1]; // get destination name
     }
 }
 
-// ===== ENCAPSULATION =====
-// Private attributes with getters.
-// Protects data and prevents direct access.
+// ===================================================
+//  ⋆.𐙚 ̊ ENCAPSULATION⋆.𐙚 ̊
+//  Booking class keeps its data private so they cannot
+//  be changed directly. Only getters are allowed.
+// ===================================================
 class Booking {
     private String bookingID;
     private String passengerName;
@@ -52,6 +61,7 @@ class Booking {
     private int seatsBooked;
     private double totalFare;
 
+    // constructor to create a booking
     public Booking(String bookingID, String passengerName, String destination, int seatsBooked, double totalFare) {
         this.bookingID = bookingID;
         this.passengerName = passengerName;
@@ -60,7 +70,7 @@ class Booking {
         this.totalFare = totalFare;
     }
 
-    // Getters
+    // Getter methods only (no direct editing allowed)
     public String getBookingID() { return bookingID; }
     public String getPassengerName() { return passengerName; }
     public String getDestination() { return destination; }
@@ -68,8 +78,11 @@ class Booking {
     public double getTotalFare() { return totalFare; }
 }
 
-// ===== ENCAPSULATION =====
-// Bus class protects seat data.
+// ===================================================
+//  ⋆.𐙚 ̊ENCAPSULATION (Bus class)⋆.𐙚 ̊
+//  This class handles seat management. Seats cannot be
+//  directly edited because they are private.
+// ===================================================
 class Bus {
     private int totalSeats = 20;
     private int remainingSeats = 20;
@@ -77,7 +90,7 @@ class Bus {
     public int getRemainingSeats() { return remainingSeats; }
     public int getTotalSeats() { return totalSeats; }
 
-    // Only way to modify seats safely
+    // Books seats only if enough seats are available
     public boolean bookSeats(int seats) {
         if (seats <= remainingSeats) {
             remainingSeats -= seats;
@@ -86,7 +99,7 @@ class Bus {
         return false;
     }
 
-    // Add seats back when cancelling
+    // Adds back seats if booking is cancelled
     public void cancelSeats(int seats) {
         remainingSeats += seats;
     }
@@ -99,24 +112,27 @@ class Bus {
     }
 }
 
-// ===== MAIN PROGRAM =====
+// ===================================================
+//  𖹭.ᐟ MAIN PROGRAM𖹭.ᐟ
+//  Handles everything: menu, booking, cancel, admin.
+// ===================================================
 public class Main {
     private static Scanner sc = new Scanner(System.in);
 
-    private static Destination dest = new BusDestination();
+    private static Destination dest = new BusDestination(); // polymorphism example
     private static Bus bus = new Bus();
 
-    // ===== COMPOSITION =====
+    // List to store all bookings
     private static ArrayList<Booking> bookings = new ArrayList<>();
 
     private static int bookingCounter = 1;
 
-    // ===== NEW: store last passenger name =====
+    // Saves last user’s name for personalized exit message
     private static String lastUserName = "";
 
     public static void main(String[] args) throws Exception {
 
-        // PESO SIGN (UTF-8 OUTPUT)
+        // For peso sign support
         System.setOut(new java.io.PrintStream(System.out, true, "UTF-8"));
 
         int choice;
@@ -140,6 +156,7 @@ public class Main {
                 case 4: cancelBooking(); break;
                 case 5: adminLogin(); break;
                 case 6:
+                    // Shows name if user booked something
                     if (lastUserName.isEmpty()) {
                         System.out.println("Thank you for using the system! God bless you! ♡");
                     } else {
@@ -156,11 +173,14 @@ public class Main {
         dest.showDestinations(); 
     }
 
+    // ====================================
+    //  𐔌՞. .՞ Booking a Ticket 𐔌՞. .՞𐦯
+    // ====================================
     private static void bookTicket() {
-        sc.nextLine(); // clear buffer
-        System.out.print("Enter passenger name: ");
+        sc.nextLine(); // clears input buffer
+        System.out.print("\nEnter passenger name: ");
         String name = sc.nextLine();
-        lastUserName = name; // store the last passenger name
+        lastUserName = name; // save last user name
 
         dest.showDestinations();
         System.out.print("Choose destination (1-5): ");
@@ -169,11 +189,13 @@ public class Main {
         System.out.print("How many seats to book? ");
         int seats = sc.nextInt();
 
+        // checks if enough seats are available
         if (!bus.bookSeats(seats)) {
             System.out.println("Not enough seats available.");
             return;
         }
 
+        // auto-generate booking ID
         String bookingID = String.format("B%03d", bookingCounter++);
         double fare = dest.getFare(choice);
         double total = fare * seats;
@@ -181,6 +203,7 @@ public class Main {
         Booking b = new Booking(bookingID, name, dest.getName(choice), seats, total);
         bookings.add(b);
 
+        // booking confirmation
         System.out.println("\n--- BOOKING CONFIRMATION ---");
         System.out.println("Booking ID: " + bookingID);
         System.out.println("Destination: " + dest.getName(choice));
@@ -189,6 +212,9 @@ public class Main {
         System.out.println("Seats Remaining: " + bus.getRemainingSeats());
     }
 
+    // ===============================
+    //  ⋆.˚ CANCEL BOOKING USING ID ⋆.˚
+    // ===============================
     private static void cancelBooking() {
         sc.nextLine();
         System.out.print("Enter your Booking ID to cancel: ");
@@ -205,6 +231,9 @@ public class Main {
         System.out.println("Booking ID not found.");
     }
 
+    // ===============================
+    //        ʚɞ  ADMIN LOGIN ʚɞ
+    // ===============================
     private static void adminLogin() {
         int attempts = 3;
         sc.nextLine(); // clear buffer
@@ -218,7 +247,7 @@ public class Main {
                 break;
             } else {
                 attempts--;
-                System.out.println("Incorrect password. ˙◠˙ Attempts left: " + attempts);
+                System.out.println("Incorrect password. Attempts left: " + attempts);
 
                 if (attempts == 0) {
                     System.out.println("Too many failed attempts. Returning to main menu...");
