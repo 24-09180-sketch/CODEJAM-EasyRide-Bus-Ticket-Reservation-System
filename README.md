@@ -1,3 +1,109 @@
+         ✩°｡🧸𓏲⋆.🧺𖦹 ₊˚      𐔌 .⋮CODEJAM EasyRide  .ᐟ ֹ ₊ ꒱ ✩°｡🧸𓏲⋆.🧺
+         
+                       Bus Ticket Reservation System 𖹭
+                                     IT-2109
+                            Cabral, Jhannea Maica M. 𖹭  J
+                             De Castro, Marc James D. 𖹭  M 
+                           Ronquillo, Ashley Annabel E. 𖹭  A
+                                = CODEJAM ˚.𖥻 ׁ ׅ ! ׁ ׅ 🪷
+
+🚌 CodeJAM EasyRide Bus Ticket Reservation System 🚌
+
+₊˚🖇️✩ OVERVIEW‧ ₊˚📖 
+
+⋮ ⌗ ┆ The CodeJAM EasyRide: Bus Reservation System is a console-based system that is designed to simplify bus ticket booking and management by allowing users or passengers to view available destinations, check seat availability, book tickets, and cancel reservations using a booking ID. The system also includes an admin feature that enables administrators to view all bookings and manage seat allocations. The goal of this system is to provide a convenient and organized way to handle bus reservations which promotes smoother and sustainable transportation services.
+
+CodeJAM EasyRide is a console-based Java application designed to simplify bus ticket booking and management.
+It demonstrates Object-Oriented Programming (OOP) concepts such as:
+
+🔒 *Encapsulation <𝟑 .ᐟ
+
+In the EasyRide system, encapsulation is implemented by keeping sensitive data private inside classes such as Booking and Bus. For example, passenger names, booking IDs, booked seats, and total fares are stored as private fields in the Booking class, while the bus seat statuses are private in the Bus class. These values cannot be modified directly from outside the class. Instead, the program uses getters and controlled methods like bookSeats() and cancelSeats() to access or update the data safely. This ensures that bookings and seat availability remain accurate and prevents accidental or unauthorized changes.
+
+🧬 Inheritance✧₊⁺.˚୨ৎ
+
+Inheritance is demonstrated through the relationship between Destination and BusDestination. The BusDestination class extends the abstract Destination class, inheriting its structure and behavior while providing specific implementations for methods like showDestinations(), getFare(), and getName(). This allows code reuse and ensures that all destination types follow a consistent structure without rewriting the same methods for each subclass.
+
+🎭 Polymorphism ☆⋆｡𖦹°‧★
+
+Polymorphism appears in the system when the program interacts with the Destination reference while calling methods implemented in BusDestination. For example, dest.showDestinations() can work with any subclass of Destination, allowing the system to handle different destination types without changing the main code. Similarly, booking or cancellation operations can work uniformly on Booking objects regardless of the specific details of the booking.
+
+🧱 Abstraction₊˚⊹ᰔ
+
+Abstraction is used by hiding complex logic inside methods, making the main program clean and easy to follow. Tasks like checking seat availability, validating seat numbers, and generating booking IDs are encapsulated in dedicated methods such as bookSeats(), cancelSeats(), and getFare(). Users interact only with simple, high-level options in the menu, while the program handles the detailed operations behind the scenes.
+
+🧩 Program Structure (CodeJAM EasyRide) 𐙚⋆°.⋆♡
+
+The system is organized into classes with clear responsibilities:
+
+၄၃ Destination (abstract) → defines a blueprint for destinations
+
+၄၃ BusDestination → provides specific destination data
+
+၄၃ Booking → manages booking details safely
+
+၄၃ Bus → handles seat management and availability
+
+၄၃ Main → controls the user interface and menu flow
+
+This structure keeps the code modular, readable, and easy to maintain, while demonstrating the core OOP principles effectively.
+
+👥 Users Can:
+🗺️ View available destinations and fares
+🪑 Check seat availability
+🎟️ Book tickets with seat selection
+❌ Cancel bookings using Booking ID
+🔒 Admin functionalities:
+
+♡ View all bookings
+
+♡ Remove any booking
+
+💾 Ticket & Seat Management
+📌 All bookings are stored in ArrayList for real-time management
+🪑 Booked seats are tracked to prevent double bookings
+🎫 Each booking has a unique Booking ID automatically generated
+
+🏗️ Project Structure
+1️⃣ Destination (Abstract Class)
+
+📝 Defines a template for all destinations
+
+Methods:
+
+showDestinations() – Display destinations and fares
+getFare(choice) – Get fare for selected destination
+getName(choice) – Get name of selected destination
+
+2️⃣ BusDestination (Inheritance & Polymorphism)
+
+🚍 Implements Destination
+
+Stores available places and fares
+
+Overrides abstract methods to provide specific destination data
+
+3️⃣ Booking (Encapsulation)
+
+🔒 Stores passenger name, destination, seats, and total fare
+
+Only getter methods provided for secure access
+
+4️⃣ Bus (Encapsulation)
+
+🪑 Manages total seats, remaining seats, and booking logic
+
+Tracks booked seats to prevent double booking
+
+5️⃣ Main Class
+
+💻 Handles user interaction and menus
+Allows booking, cancelling, and admin operations
+Provides personalized messages to users
+
+₊˚ ┊ Contributions 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # CODEJAM-EasyRide-Bus-Ticket-Reservation-System
 This system is a is a console-based system that is designed to simplify bus ticket booking and management by allowing users or passengers to view available destinations, check seat availability, book tickets, and cancel reservations using a booking ID. The goal of this system is to provide a convenient and organized way to handle bus reservations. ⋆˙⟡
 
