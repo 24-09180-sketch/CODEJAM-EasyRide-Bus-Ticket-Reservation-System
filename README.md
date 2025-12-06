@@ -101,7 +101,18 @@ Tracks booked seats to prevent double booking
 Allows booking, cancelling, and admin operations
 Provides personalized messages to users
 
-₊˚ ┊ Contributions 
+| **File**                                           | **Description**                                                                                                                                                                          |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Destination.java** *(abstract—inside Main file)* | Abstract Base Class providing the template for all destination types. Requires subclasses to implement `showDestinations()`, `getFare()`, and `getName()`. Demonstrates **abstraction**. |
+| **BusDestination.java**                            | Extends **Destination**. Stores lists of destinations and fares, and implements abstract methods. Demonstrates **inheritance + polymorphism**.                                           |
+| **Booking.java**                                   | Encapsulates booking information such as passenger name, destination, seats booked, and total fare. Provides getters/setters for controlled access. Demonstrates **encapsulation**.      |
+| **Bus.java**                                       | Handles seat reservation logic (viewing availability, booking, canceling). Seat array is private to prevent direct modification. Demonstrates **encapsulation**.                         |
+| **Main.java**                                      | Main entry point. Manages UI, destination viewing, booking, canceling, seat availability, admin login, and internal booking list. Controls full program flow.                            |
+
+₊˚ ┊ Rate of Contributions :
+Leader: Cabral, Jhannea Maica M. - 5/5
+Members: Ronquillo, Ashley Annabel - 5/5
+         De Castro, Marc James - 5/5
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # CODEJAM-EasyRide-Bus-Ticket-Reservation-System
